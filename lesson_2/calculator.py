@@ -4,6 +4,8 @@
 # Print the result of this calculation
 
 
+# Alternative functional solutions:
+
 # def calculator(num1, num2, opratr_num):
 #     if opratr_num == 1:
 #         operator = '+'
@@ -19,6 +21,23 @@
 #         return 'ERROR - invalid input'
 #
 #     return eval(f'{num1} {operator} {num2}')
+
+# output = calculator(number1, number2, operation)
+
+# if operation == 1:
+#     output = number1 + number2
+# elif operation == 2:
+#     output = number1 - number2
+# elif operation == 3:
+#     output = number1 * number2
+# elif operation == 4:
+#     if number2 == 0:
+#         output = 'ERROR - division by zero'
+#     else:
+#         output = number1 / number2
+# else:
+#     output = 'ERROR - invalid input'
+
 
 def prompt_test_num(message):
     num = input((f"==> {message}"))
@@ -47,40 +66,36 @@ def prompt_test_opratr(message):
 
     return int(opratr)
 
-
-number1 = prompt_test_num("Welcome to the calculator\n"
+while True:
+    number1 = prompt_test_num("Welcome to the calculator\n"
                           "==> What's the first number? (digits only)\n")
-number2 = prompt_test_num("What's the second number? (digits only)\n")
-operation = prompt_test_opratr('What operation would you like to perform?\n'
+    number2 = prompt_test_num("What's the second number? (digits only)\n")
+    operation = prompt_test_opratr('Please enter an operation code.\n'
                         '==> 1) Add, 2) Subtract, 3) Multiply, 4) Divide\n')
 
+    match operation:
+        case 1:
+            output = number1 + number2
+        case 2:
+            output = number1 - number2
+        case 3:
+            output = number1 * number2
+        case 4:
+            output = number1 / number2
 
-# output = calculator(number1, number2, operation)
+    print(f'==> The result is: {output}')
 
+    while True:
+        another_calc = input("==> Please enter 'yes' to perform another "
+                             "calculation or 'no' to exit the program.\n")
+        try:
+            another_calc = another_calc.lower()
+        except ValueError:
+            continue
+        else:
+            match another_calc:
+                case 'yes' | 'no':
+                    break
 
-# if operation == 1:
-#     output = number1 + number2
-# elif operation == 2:
-#     output = number1 - number2
-# elif operation == 3:
-#     output = number1 * number2
-# elif operation == 4:
-#     if number2 == 0:
-#         output = 'ERROR - division by zero'
-#     else:
-#         output = number1 / number2
-# else:
-#     output = 'ERROR - invalid input'
-
-
-match operation:
-    case 1:
-        output = number1 + number2
-    case 2:
-        output = number1 - number2
-    case 3:
-        output = number1 * number2
-    case 4:
-        output = number1 / number2
-
-print(f'==> The result is: {output}')
+    if another_calc == 'no':
+        break
