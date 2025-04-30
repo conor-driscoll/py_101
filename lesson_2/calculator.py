@@ -1,3 +1,9 @@
+import json
+# Open the JSON file for reading
+with open('calculator_messages.json', 'r') as file:
+    data = json.load(file)
+# Now 'data' contains the contents of the JSON file as a Python dictionary or list
+
 # Obtain two numbers from user input and assign to variables
 # Obtain operator from user input and assign to a variable
 # Place number variables on either side of the operator
@@ -45,8 +51,7 @@ def prompt_test_num(message):
         try:
             int(num)
         except ValueError:
-            num = input("==> Hmm... That doesn't look like a valid number.\n"
-                        "==> Please re-enter\n")
+            num = input(data["prompt_test_num_msg1"])
             continue
 
         return int(num)
@@ -56,22 +61,17 @@ def prompt_test_opratr(message):
 
     if number2 == 0 and opratr == "4":
         while opratr not in ["1", "2", "3"]:
-            opratr = input("==> You must choose 1, 2, or 3 in this case, "
-                           "since division by 0 is undefined.\n"
-                           "==> Please re-enter\n")
+            opratr = input(data["prompt_test_opratr_msg1"])
     else:
         while opratr not in ["1", "2", "3", "4"]:
-            opratr = input("==> You must choose 1, 2, 3, or 4.\n"
-                           "==> Please re-enter\n")
+            opratr = input(data["prompt_test_opratr_msg2"])
 
     return int(opratr)
 
 while True:
-    number1 = prompt_test_num("Welcome to the calculator\n"
-                          "==> What's the first number? (digits only)\n")
-    number2 = prompt_test_num("What's the second number? (digits only)\n")
-    operation = prompt_test_opratr('Please enter an operation code.\n'
-                        '==> 1) Add, 2) Subtract, 3) Multiply, 4) Divide\n')
+    number1 = prompt_test_num(data["number1_msg"])
+    number2 = prompt_test_num(data["number2_msg"])
+    operation = prompt_test_opratr(data["operation_msg"])
 
     match operation:
         case 1:
@@ -86,8 +86,7 @@ while True:
     print(f'==> The result is: {output}')
 
     while True:
-        another_calc = input("==> Please enter 'yes' to perform another "
-                             "calculation or 'no' to exit the program.\n")
+        another_calc = input(data["another_calc_msg"])
         try:
             another_calc = another_calc.lower()
         except ValueError:
