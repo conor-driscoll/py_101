@@ -2,7 +2,8 @@ import json
 # Open the JSON file for reading
 with open('calculator_messages.json', 'r') as file:
     data = json.load(file)
-# Now 'data' contains the contents of the JSON file as a Python dictionary or list
+# Now 'data' contains the contents of the JSON file as a Python dictionary
+# or list
 
 # Obtain two numbers from user input and assign to variables
 # Obtain operator from user input and assign to a variable
@@ -49,29 +50,48 @@ def prompt_test_num(message):
     num = input((f"==> {message}"))
     while True:
         try:
-            int(num)
+            return int(num)
         except ValueError:
-            num = input(data["prompt_test_num_msg1"])
-            continue
-
-        return int(num)
+            try:
+                return float(num)
+            except ValueError:
+                num = input(data[language]["prompt_test_num_msg"])
 
 def prompt_test_opratr(message):
     opratr = input((f"==> {message}"))
 
     if number2 == 0 and opratr == "4":
         while opratr not in ["1", "2", "3"]:
-            opratr = input(data["prompt_test_opratr_msg1"])
+            opratr = input(data[language]["prompt_test_opratr_msg1"])
     else:
         while opratr not in ["1", "2", "3", "4"]:
-            opratr = input(data["prompt_test_opratr_msg2"])
+            opratr = input(data[language]["prompt_test_opratr_msg2"])
 
     return int(opratr)
 
+
 while True:
-    number1 = prompt_test_num(data["number1_msg"])
-    number2 = prompt_test_num(data["number2_msg"])
-    operation = prompt_test_opratr(data["operation_msg"])
+    language = input("==> Please enter 'English' for calculator program "
+                         "messages in English.\n"
+                         "==> Por favor, introduzca 'Español' para los "
+                         "mensajes del programa de la calculadora "
+                         "en español.\n")
+    try:
+        language = language.lower()
+    except ValueError:
+        continue
+    else:
+        if language == 'espanol':
+            language = 'español'
+        match language:
+            case 'english' | 'español' :
+                break
+
+while True:
+
+    number1 = prompt_test_num(data[language]["number1_msg"])
+    number2 = prompt_test_num(data[language]["number2_msg"])
+    operation = prompt_test_opratr(data[language]["operation_msg"])
 
     match operation:
         case 1:
@@ -83,17 +103,17 @@ while True:
         case 4:
             output = number1 / number2
 
-    print(f'==> The result is: {output}')
+    print(f"{data[language]["result_msg"]} {output}")
 
     while True:
-        another_calc = input(data["another_calc_msg"])
+        another_calc = input(data[language]["another_calc_msg"])
         try:
             another_calc = another_calc.lower()
         except ValueError:
             continue
         else:
             match another_calc:
-                case 'yes' | 'no':
+                case 'yes' | 'no' | 'sí' | 'si' :
                     break
 
     if another_calc == 'no':
