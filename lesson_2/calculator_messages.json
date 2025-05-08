@@ -1,38 +1,26 @@
 {
-"english" : {
-    "prompt_test_num_msg" : 
-    "==> Hmm... That doesn't look like a valid number.\n==> Please re-enter\n",
-    "prompt_test_opratr_msg1" : 
-    "==> You must choose 1, 2, or 3 in this case, since division by 0 is undefined.\n==> Please re-enter\n",
-    "prompt_test_opratr_msg2" : 
-    "==> You must choose 1, 2, 3, or 4.\n==> Please re-enter\n",
-    "number1_msg" : 
-    "Welcome to the calculator!\n==> What's the first number?\n",
-    "number2_msg" : 
-    "What's the second number?\n",
-    "operation_msg" : 
-    "Please enter an operation code.\n==> 1) Add, 2) Subtract, 3) Multiply, 4) Divide\n",
-    "another_calc_msg" : 
-    "==> Please enter 'yes' to perform another calculation or 'no' to exit the program.\n",
-    "result_msg" :
-    "==> The result is:"
-            },
-"español" : {
-    "prompt_test_num_msg1" :
-    "==> Hmm... Ese no parece un número válido..\n==> Por favor vuelve a entrar\n",
-    "prompt_test_opratr_msg1" :
-    "==> Debes elegir 1, 2 o 3 en este caso, ya que la división por 0 no está definida.\n==> Por favor vuelve a entrar\n",
-    "prompt_test_opratr_msg2" :
-    "==> Debes elegir 1, 2, 3 o 4.\n==> Por favor vuelve a entrar\n",
-    "number1_msg" :
-    "¡Bienvenido a la calculadora!\n==> ¿Cuál es el primer número?\n",
-    "number2_msg" :
-    "¿Cuál es el segundo número?\n",
-    "operation_msg" :
-    "Por favor, introduzca un código de operación.\n==> 1) Sumar, 2) Restar, 3) Multiplicar, 4) Dividir\n",
-    "another_calc_msg" :
-    "==> Ingrese 'sí' para realizar otro cálculo o 'no' para salir del programa.\n",
-    "result_msg" : 
-    "==> El resultado es:"
-            }
+    "english": {
+        "prompt_test_operator_message1": "==> You must choose 1, 2, or 3 in this case, since division by 0 is undefined.\n==> Please re-enter\n",
+        "prompt_test_operator_message2": "==> You must choose 1, 2, 3, or 4.\n==> Please re-enter\n",
+        "welcome_message": "==> Welcome to the calculator!\n",
+        "number1_message": "What's the first number?\n\n",
+        "number2_message": "What's the second number?\n\n",
+        "operation_message": "Please enter an operation code.\n\n==> 1) Add, 2) Subtract, 3) Multiply, 4) Divide\n\n",
+        "another_calculation_message": "==> Please enter 'yes' to perform another calculation or 'no' to exit the program.\n\n",
+        "invalid_entry_message": "==> Invalid entry received:",
+        "decimal_answer_message": "(value has been rounded to two decimal places)\n",
+        "goodbye_message": "==> Goodbye until next time!\n"
+    },
+    "espanol": {
+        "prompt_test_operator_message1": "==> Debes elegir 1, 2 o 3 en este caso, ya que la división por 0 no está definida.\n==> Por favor vuelve a entrar\n",
+        "prompt_test_operator_message2": "==> Debes elegir 1, 2, 3 o 4.\n==> Por favor vuelve a entrar\n",
+        "welcome_message": "==> ¡Bienvenido a la calculadora!\n",
+        "number1_message": "¿Cuál es el primer número?\n\n",
+        "number2_message": "¿Cuál es el segundo número?\n\n",
+        "operation_message": "Por favor, introduzca un código de operación.\n\n==> 1) Sumar, 2) Restar, 3) Multiplicar, 4) Dividir\n\n",
+        "another_calculation_message": "==> Ingrese 'sí' para realizar otro cálculo o 'no' para salir del programa.\n\n",
+        "invalid_entry_message": "==> Entrada no válida recibida:",
+        "decimal_answer_message": "(el valor se ha redondeado a dos decimales)\n",
+        "goodbye_message": "==> Adiós, amigo!\n"
+    }
 }
