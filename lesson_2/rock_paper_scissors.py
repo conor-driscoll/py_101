@@ -88,10 +88,10 @@ def player_choice_input():
 
         prompt(f"Invalid choice: '{initial_selection}'")
 
-def check_1st_letter_match(initial_selection_argument, choice_upper_argument):
+def check_1st_letter_match(initial_selection, choice_upper):
     valid_move_matches = [valid_move for valid_move in
                             WINNING_MOVES if
-                       valid_move.startswith(f'{choice_upper_argument[0]}')]
+                       valid_move.startswith(f'{choice_upper[0]}')]
 
     qty_valid_move_matches = len(valid_move_matches)
 
@@ -100,15 +100,14 @@ def check_1st_letter_match(initial_selection_argument, choice_upper_argument):
 
     if qty_valid_move_matches > 1:
         return choose_from_multiple_matches(valid_move_matches,
-                                            initial_selection_argument)
+                                            initial_selection)
     return False
 
-def choose_from_multiple_matches(valid_move_matches_argument,
-                                 initial_selection_argument):
+def choose_from_multiple_matches(valid_move_matches, initial_selection):
     while True:
         prompt(f"The first letter of your initial entry, "
-               f"'{initial_selection_argument[0]}', matched the following "
-               f'choices: {", ".join(valid_move_matches_argument)}.\n')
+               f"'{initial_selection[0]}', matched the following "
+               f'choices: {", ".join(valid_move_matches)}.\n')
         prompt("Please select '1' for the first option listed, '2' for the "
                "second, etc.\n")
         index_input = input()
@@ -127,51 +126,50 @@ def choose_from_multiple_matches(valid_move_matches_argument,
                 continue
 
         try:
-            return valid_move_matches_argument[index_int - 1]
+            return valid_move_matches[index_int - 1]
         except IndexError:
             os.system('clear')
             prompt(f"Invalid selection: '{index_input}'. Please re-select.")
 
-def decide_game_winner(both_choices_argument):
+def calc_game_winner(both_choices):
 
-    player, computer = both_choices_argument
+    player, computer = both_choices
 
     os.system('clear')
     time.sleep(1)
 
     if computer in WINNING_MOVES[player]:
         return (f"Your {player} {WINNING_MOVES[player][computer][1]} the "
-                f"computer's {computer}.", "You win the game!")
+                f"computer's {computer}.", "You win the game!", "player")
     if player in WINNING_MOVES[computer]:
         return (f"The computer's {computer} "
                 f"{WINNING_MOVES[computer][player][1]} your {player}.",
-                "The computer wins the game!")
+                "The computer wins the game!", "computer")
 
     return (f"Your {player} & the computer's {computer} struggled to a draw.",
-             "It's a tie!")
+             "It's a tie!", "tie")
 
-def decide_series_winner(player_score_argument, computer_score_argument):
+def calc_series_winner(player_score, computer_score):
 
     series_winning_number = calculate_series_winning_number()
 
-    if player_score_argument == series_winning_number:
+    if player_score == series_winning_number:
         return 'You win'
-    if computer_score_argument == series_winning_number:
+    if computer_score == series_winning_number:
         return 'Computer wins'
 
     return False
 
-def score_board(game_recap_argument, game_outcome_argument,
-                player_score_argument, computer_score_argument,
-                series_outcome_argument):
+def score_board(game_recap, game_outcome, player_score, computer_score,
+                series_outcome):
 
-    prompt(f"{game_recap_argument}")
-    prompt(f"{game_outcome_argument}\n")
-    prompt(f"Your score is: {player_score_argument} win(s).")
-    prompt(f"The computer's score is: {computer_score_argument} win(s).\n")
+    prompt(f"{game_recap}")
+    prompt(f"{game_outcome}\n")
+    prompt(f"Your score is: {player_score} win(s).")
+    prompt(f"The computer's score is: {computer_score} win(s).\n")
 
-    if series_outcome_argument:
-        prompt(f"{series_outcome_argument} the best of {MAX_SERIES_LENGTH} "
+    if series_outcome:
+        prompt(f"{series_outcome} the best of {MAX_SERIES_LENGTH} "
                 "series!\n")
 
 def play_again_input():
@@ -185,11 +183,12 @@ def play_again_input():
             prompt(f"Invalid choice: '{answer}'")
             continue
 
-        if answer_lower[0] == 'n':
-            prompt('Thanks for playing! Goodbye for now.\n')
-            return False
-        if answer_lower[0] == 'y':
-            return True
+        match answer_lower:
+            case 'n' | 'no' :
+                prompt('Thanks for playing! Goodbye for now.\n')
+                return False
+            case 'y' | 'yes' :
+                return True
 
         prompt(f"Invalid choice: '{answer}'")
 
@@ -211,15 +210,15 @@ def rock_paper_scissors_game_with_bonus_features():
 
         both_choices = player_choice, computer_choice
 
-        game_recap, game_outcome = decide_game_winner(both_choices)
+        game_recap, game_outcome, game_winner = calc_game_winner(both_choices)
 
-        match game_outcome:
-            case "You win the game!":
+        match game_winner:
+            case "player":
                 player_score += 1
-            case "The computer wins the game!":
+            case "computer":
                 computer_score += 1
 
-        series_outcome = decide_series_winner(player_score, computer_score)
+        series_outcome = calc_series_winner(player_score, computer_score)
 
         score_board(game_recap, game_outcome, player_score,
                     computer_score, series_outcome)
@@ -234,6 +233,7 @@ def rock_paper_scissors_game_with_bonus_features():
 
 
 rock_paper_scissors_game_with_bonus_features()
+
 
 
 # Extra unused code below:
